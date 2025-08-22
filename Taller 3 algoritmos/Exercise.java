@@ -2,15 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 
-/**
- * Algoritmo: Bubble Sort
- * Complejidad temporal: O(n^2)
- * Operación dominante: comparaciones e intercambios dentro del doble for
- * Complejidad espacial: O(1) (usa solo variables auxiliares)
- */
 public class Exercise {
 
-    // Algoritmo Bubble Sort
     public static void bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
@@ -25,7 +18,7 @@ public class Exercise {
 
     // Método para medir tiempos de ejecución
     public static long medirTiempo(int[] arr) {
-        int[] copia = Arrays.copyOf(arr, arr.length); // evitar ordenar el mismo arreglo
+        int[] copia = Arrays.copyOf(arr, arr.length); // evitar ordenar el mismo arreglo original
         long start = System.nanoTime(); // más preciso que currentTimeMillis
         bubbleSort(copia);
         long end = System.nanoTime();
@@ -37,22 +30,19 @@ public class Exercise {
         System.out.print("Enter number of elements: ");
         int n = sc.nextInt();
 
-        // Generar arreglo aleatorio
+        // Generar arreglo aleatorio con valores de 1 a n
         int[] data = new int[n];
         Random rand = new Random();
         for (int i = 0; i < n; i++) {
-            data[i] = rand.nextInt(1000);
+            data[i] = rand.nextInt(n) + 1; // rango [1, n]
         }
 
-        // Ejecutar una sola vez
+        // Ejecutar una sola vez y medir tiempo
         long duration = medirTiempo(data);
         System.out.println("Tiempo de ejecución: " + duration + " ms");
 
-        // Mostrar los primeros 10 elementos ordenados
-        int[] copySorted = Arrays.copyOf(data, data.length);
-        bubbleSort(copySorted);
-        System.out.println("Primeros 10 elementos ordenados: " +
-                Arrays.toString(Arrays.copyOf(copySorted, 10)));
+        System.out.println("Primeros 10 elementos generados: " +
+                Arrays.toString(Arrays.copyOf(data, 10)));
 
         sc.close();
     }
